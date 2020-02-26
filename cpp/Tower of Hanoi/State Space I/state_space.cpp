@@ -33,12 +33,9 @@ bool op_req(int n, char m, char state[3]) {
 	for (int i = 0; i < 3; i++) {
         // nem alkalmazható az operátor, ha van kisebb korong azon az oszlopon amiről el akarunk rakni
 		if (state[i] == state[n] && i < n) return false;
-	}
-
-    for (int i = 0; i < 3; i++) {
         // nem alkalmazható az operátor, ha van kisebb korong azon az oszlopon amire rakni akarunk
         if (state[i] == m && i < n) return false;
-    }
+	}
 
     return true;
 }
