@@ -58,7 +58,7 @@ int min(std::set<int> state) {
 bool op_req(int from, int to, std::set<int> state[3]) {
     // ha a 'honnan'-ban van elem és a 'honnan' minimumja kisebb
     // mint a 'hova' minimumja akkor alkalmazható
-    return state[from].size() > 0 && min(state[from]) < min(state[to]);
+    return from >= 0 && from < 3 && to >= 0 && to < 3 && state[from].size() > 0 && min(state[from]) < min(state[to]);
 }
 
 void op(int from, int to, std::set<int> state[3]) {

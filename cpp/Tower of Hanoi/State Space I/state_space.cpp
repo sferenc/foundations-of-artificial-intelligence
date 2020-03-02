@@ -22,13 +22,13 @@ bool is_goal(char state[3]) {
 
 bool op_req(int n, char m, char state[3]) {
 
-    // ha ugyanoda raknánk ahol van a korong akkor nem alkalmazható az operátor
-    if  (state[n] == m) return false;
-
     // ha a 'melyiket' kisebb mint 0 vagy 3 vagy nagyobb akkor nem alkalmazható operátor    
     if (n < 0 || n >= 3) return false;
     // ha nem A, B vagy C oszlopra akarunk rakni akkor nem alkalmazható operátor
     if (m < 'A' || m > 'C') return false;
+
+    // ha ugyanoda raknánk ahol van a korong akkor nem alkalmazható az operátor
+    if  (state[n] == m) return false;
 
 	for (int i = 0; i < 3; i++) {
         // nem alkalmazható az operátor, ha van kisebb korong azon az oszlopon amiről el akarunk rakni
