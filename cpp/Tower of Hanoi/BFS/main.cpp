@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-bool is_valid(char* state) {
+bool is_valid(std::vector<char> state) {
     for (int i = 0; i < 3; i++) {
         // ha az egyik korong nem az A, B vagy C oszlopon van akkor nem állapot
         if (state[i] != 'A' && state[i] != 'B' && state[i] != 'C') return false;
@@ -9,7 +9,7 @@ bool is_valid(char* state) {
     return true;
 }
 
-bool is_goal(char* state) {
+bool is_goal(std::vector<char> state) {
     for (int i = 0; i < 3; i++) {
         // ha az egyik korong nem az utolsó oszlopon van akkor nem célállapot
         if (state[i] != 'C') return false;
@@ -18,7 +18,7 @@ bool is_goal(char* state) {
     return true;
 }
 
-bool op_req(int n, char m, char* state) {
+bool op_req(int n, char m, std::vector<char> state) {
 
     // ha a 'melyiket' kisebb mint 0 vagy 3 vagy nagyobb akkor nem alkalmazható operátor    
     if (n < 0 || n >= 3) return false;
@@ -38,8 +38,8 @@ bool op_req(int n, char m, char* state) {
     return true;
 }
 
-char* op(int n, char m, char* state) {
-    char* result = new char[3];
+std::vector<char> op(int n, char m, std::vector<char> state) {
+    std::vector<char> result(3);
 
     for (int i = 0; i < 3; i++) {
         result[i] = state[i];
@@ -55,7 +55,7 @@ char* op(int n, char m, char* state) {
     return result;
 }
 
-void print_state(char* state) {
+void print_state(std::vector<char> state) {
 
     for (int i = 0; i < 3; i++) {
         if (i) std::cout << ' ';
@@ -68,11 +68,11 @@ void print_state(char* state) {
 int main() {
 
     {
-        char* state = new char[3];
+        std::vector<char> state(3);
         state[0] = state[1] = state[2] = 'A';
-        std::queue<std::pair<char*, int>> opened;
-        std::vector<std::pair<char*, int>> closed;
-        std::map<char*, bool> taken; 
+        std::queue<std::pair<std::vector<char>, int>> opened;
+        std::vector<std::pair<std::vector<char>, int>> closed;
+        std::map<std::vector<char>, bool> taken; 
         
         opened.push(std::make_pair(state, -1));
 
@@ -91,7 +91,7 @@ int main() {
             for (int i = 0; i < 3; i++) {
                 for (char c = 'A'; c != 'D'; c++) {
                     if (op_req(i, c, front.first)) {
-                        char* result = op(i, c, front.first);
+                        std::vector<char> result = op(i, c, front.first);
 
                         if (!taken[result]) {
                             opened.push(std::make_pair(result, closed.size() - 1));
