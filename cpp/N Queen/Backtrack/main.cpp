@@ -43,16 +43,23 @@ int main() {
     state.push_back(0);
 
     while (state.size() && !is_goal(state)) {
+
+        bool wrong = false;
         while (state.size() && state.back() == MAX_SIZE) {
             state.pop_back();
+
+            if (state.size() == 0) {
+                std::cerr << "Couldn't find solution..." << std::endl;
+                wrong = true;
+                break;       
+            }
+
             state.back()++;
         }
 
-        if (state.size() == 0) {
-            std::cerr << "Couldn't find solution..." << std::endl;
-            break;       
+        if (wrong) {
+            break;
         }
-
 
         if (!is_valid(state)) {
             state.back()++;
